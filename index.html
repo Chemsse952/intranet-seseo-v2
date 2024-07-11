@@ -58,14 +58,28 @@
         <button onclick="login()">Se connecter</button>
     </div>
     <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        }
 
-            if (username === 'admin' && password === 'password') {
-                window.location.href = 'login.html';
-            } else {
-                alert('Identifiants incorrects');
+        function logout() {
+            window.location.href = 'login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.add('closed');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (window.innerWidth <= 768 && !sidebar.contains(event.target) && event.target !== menuToggle) {
+                sidebar.classList.add('closed');
+                sidebar.classList.remove('open');
             }
         }
     </script>
